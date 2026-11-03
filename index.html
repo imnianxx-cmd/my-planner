@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" 
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+
+<title>My Planner 🌹</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+
+<body>
+
+
+<div class="app">
+
+
+
+<!-- 首页 -->
+
+<section id="calendarPage" class="page active">
+
+
+<header class="top">
+
+
+<div class="rose">
+🌹
+</div>
+
+
+<h1>
+My Planner
+</h1>
+
+
+<p id="todayText">
+</p>
+
+
+</header>
+
+
+
+
+
+<div class="month-box">
+
+
+<button onclick="changeMonth(-1)">
+‹
+</button>
+
+
+<h2 id="monthTitle">
+</h2>
+
+
+<button onclick="changeMonth(1)">
+›
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="week">
+
+
+<span>日</span>
+<span>一</span>
+<span>二</span>
+<span>三</span>
+<span>四</span>
+<span>五</span>
+<span>六</span>
+
+
+</div>
+
+
+
+
+
+<div id="calendar"
+class="calendar">
+
+</div>
+
+
+
+
+
+
+
+<div class="paper-card">
+
+
+<h3>
+今日记录
+</h3>
+
+
+<p>
+📝
+<span id="previewDiary">
+还没有日记
+</span>
+</p>
+
+
+
+<p>
+🌹
+<span id="previewMood">
+今日心情
+</span>
+</p>
+
+
+
+<p>
+✅
+<span id="previewTodo">
+0 项待办
+</span>
+</p>
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- 日记页面 -->
+
+
+<section id="diaryPage"
+class="page">
+
+
+<button class="back"
+onclick="showPage('calendarPage')">
+
+← 返回
+
+</button>
+
+
+
+<h2 id="diaryTitle">
+
+</h2>
+
+
+
+
+<div class="paper-card">
+
+
+<h3>
+今日心情
+</h3>
+
+
+<div class="moods">
+
+
+<button onclick="setMood('😊')">
+😊
+</button>
+
+
+<button onclick="setMood('🌸')">
+🌸
+</button>
+
+
+<button onclick="setMood('☁️')">
+☁️
+</button>
+
+
+<button onclick="setMood('❤️')">
+❤️
+</button>
+
+
+
+</div>
+
+
+
+
+<textarea 
+id="diaryText"
+placeholder="Dear Diary...
+
+写下今天的故事、想法、心情……">
+</textarea>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="paper-card">
+
+
+<h3>
+今日事项
+</h3>
+
+
+<div class="todo-add">
+
+
+<input 
+id="todoInput"
+placeholder="新增事项">
+
+
+<button onclick="addTodo()">
+＋
+</button>
+
+
+</div>
+
+
+<ul id="todoList">
+
+</ul>
+
+
+</div>
+
+
+
+
+
+<button class="save"
+onclick="saveDiary()">
+
+保存今天 🌹
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- 待办页面 -->
+
+
+<section id="todoPage"
+class="page">
+
+
+<h2>
+全部待办
+</h2>
+
+
+
+<div class="paper-card">
+
+<ul id="allTodoList">
+
+</ul>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- 课表页面 -->
+
+
+<section id="schedulePage"
+class="page">
+
+
+<h2>
+我的课表 📚
+</h2>
+
+
+
+<div class="paper-card">
+
+
+<table class="schedule">
+
+
+<tr>
+
+<th></th>
+<th>一</th>
+<th>二</th>
+<th>三</th>
+<th>四</th>
+<th>五</th>
+
+
+</tr>
+
+
+
+<tbody id="scheduleBody">
+
+
+</tbody>
+
+
+</table>
+
+
+<button class="save"
+onclick="saveSchedule()">
+
+保存课表
+
+</button>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- 设置 -->
+
+
+<section id="settingPage"
+class="page">
+
+
+<h2>
+设置
+</h2>
+
+
+
+<div class="paper-card">
+
+
+<p>
+🌹 我的 Planner
+</p>
+
+
+<p>
+资料储存在本机浏览器
+</p>
+
+
+<p>
+🎀 梦幻手帐模式
+</p>
+
+
+
+<button onclick="clearData()">
+
+清除全部资料
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 底部导航 -->
+
+
+<nav>
+
+
+<button onclick="showPage('calendarPage')">
+
+📅
+<span>
+日历
+</span>
+
+</button>
+
+
+
+<button onclick="showPage('diaryPage')">
+
+📝
+<span>
+日记
+</span>
+
+</button>
+
+
+
+<button onclick="showPage('todoPage')">
+
+✅
+<span>
+待办
+</span>
+
+</button>
+
+
+
+<button onclick="showPage('schedulePage')">
+
+📚
+<span>
+课表
+</span>
+
+</button>
+
+
+
+<button onclick="showPage('settingPage')">
+
+⚙️
+<span>
+设置
+</span>
+
+</button>
+
+
+
+</nav>
+
+
+
+
+
+</div>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+
+</html>
